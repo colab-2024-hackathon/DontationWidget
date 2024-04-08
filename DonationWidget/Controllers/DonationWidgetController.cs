@@ -369,6 +369,23 @@ namespace DonationWidget.Controllers
             return result;
         }
 
+        public ActionResult Donate(string SelectedCharity, string SelectedAccount, decimal DonationAmount)
+        {
+            // For real life 
+            // var charityId = Guid.Parse(SelectedCharity);
+            var transaction = new DonationTransactionModel
+            {
+                FromAccount = GetAnAccount((long)Convert.ToDouble(SelectedAccount)),
+                ToCharity = SelectedCharity,
+                Amount = DonationAmount
+            };
 
+            TransferFunds(transaction);
+            LogTransfer(transaction);
+
+
+            // Redirect to a confirmation page or back to the form with a success message
+            return RedirectToAction("DonationSuccess");
+        }
     }
 }
