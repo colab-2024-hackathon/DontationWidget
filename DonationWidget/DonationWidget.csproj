@@ -408,6 +408,7 @@
     <None Include="app.config" />
     <None Include="Tools\PostBuild.ps1" />
     <None Include="DonationWidget.nuspec" />
+    <Compile Include="Models\Charity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WidgetDescription.cs" />
     <Compile Include="Models\DonationWidgetModel.cs" />
