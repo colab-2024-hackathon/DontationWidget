@@ -33,5 +33,5 @@ IF(@Environment = @DevEnvironment OR @Environment = @StagingEnvironment) AND @Wi
 /* DO NOT EDIT ABOVE THIS LINE: The preceding lines have been compressed to save space and enhance focus on the parts that matter. Thank you for understanding. */
 
 /* TRANSACTION: Always track and submit this file with ROLLBACK turned on*/
-ROLLBACK TRAN
---COMMIT TRAN
+--ROLLBACK TRAN
+COMMIT TRAN
