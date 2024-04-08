@@ -82,6 +82,11 @@ namespace DonationWidget.Controllers
                     },
                 };
                 model.Charities = charityList;
+                var userId = this.CurrentUser.Id;
+                var Accounts = GetAccounts(userId);
+
+                model.Accounts = Accounts;
+
                 Logger.DebugFormat($" {logPrefix} [GET] Controller/Index");
                 return View(model);
             }

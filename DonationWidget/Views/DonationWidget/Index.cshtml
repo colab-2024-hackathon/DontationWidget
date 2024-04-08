@@ -48,16 +48,6 @@
 
 }
 
-
-@{var url = "DonationWidget/Accounts";}
-<a href=@url>
-    <button class="iris-button iris-button--primary">
-        <span class="iris-button__text">Accounts</span>
-    </button>
-</a>
-
-    Welcome to a new widget!
-
 <div class="container" style="margin-top:20px;">
     <div class="row">
         <div class="col-sm">
@@ -75,8 +65,40 @@
             <div id="charityInfo">
             </div>
         </div>
+        <!-- Second column-->
         <div class="col-sm">
-            <!-- Enter more content here -->
+            <h2 class="mar-bottom--sm">Select an account below:</h2>
+            <div class="iris-dropdown" id="account-dropdown" placeholder="Select an account" data-size="large">
+                <ul class="iris-options-list">
+                    @if (Model.Accounts.Count > 0)
+                    {
+                        foreach (var account in @Model.Accounts)
+                        {
+                            <li class="iris-option" data-value="@account.AccountIdentifier">
+                                <div class="iris-account iris-account--multi-line" data-color="account-color-0">
+                                    <span class="iris-account__color-bar"></span>
+                                    <div class="iris-account__column iris-account__account-details">
+                                        <div class="iris-account__info iris-account__primary-info">
+                                            <span class="iris-account__account-name" title="Account">Account</span>
+                                        </div>
+                                        <div class="iris-account__info iris-account__secondary-info">
+                                            <span class="iris-account__account-number"><span role="img" aria-label="Account number ending in">**********</span>@account.Number</span>
+                                            <span class="iris-account__info-icon font-icon-fi" role="img" aria-label="External account"></span>
+                                            <span class="iris-account__info-icon font-icon-pending" role="img" aria-label="Pending transactions"></span>
+                                        </div>
+                                    </div>
+                                    <div class="iris-account-balance iris-account-balance--available-balance">
+                                        <div class="iris-account-balance__row">
+                                            <span class="iris-account-balance__icon available-balance-icon" role="img" aria-label="Available balance"></span>
+                                            <span class="iris-account-balance__primary-info">$ @string.Format("{0:F2}", account.AvailableBalance)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
         </div>
     </div>
 </div>
