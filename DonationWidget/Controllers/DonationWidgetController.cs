@@ -14,6 +14,11 @@ using WebToolkit;
 using Account = Alkami.MicroServices.Accounts.Data.Account;
 using Exception = System.Exception;
 
+using Alkami.Client.Services.Notification.Repository;
+using Alkami.App.Notification.Contracts;
+using Alkami.Security.Common.DataContracts;
+using Alkami.Client.Messages;
+
 //using Alkami.Client.Framework.Utility;//used when widget setting is uncommented below
 
 
@@ -28,6 +33,8 @@ namespace DonationWidget.Controllers
         /// Gets the logger
         /// </summary>
         private static readonly ILog Logger = LogManager.GetLogger<DonationWidgetController>();
+
+        public INotificationRepository NotificationRepository { get; set; }
 
         //please add this logPrefix to the beginging of all your log statements
         string logPrefix = "DonationWidget";
@@ -52,7 +59,27 @@ namespace DonationWidget.Controllers
                         GoalAmount=5000,
                         WebsiteUrl="https://www.unitedway.org/",
                         LogoUrl="https://www.unitedway.org/assets/img/united-way-lock-up-rgb-cropped.jpg"
-                    }
+                    },
+                    new Charity()
+                    {
+                        AccountIdentifier = Guid.NewGuid(),
+                        Name = "American Red Cross",
+                        CharityInfo = "The American Red Cross is a humanitarian organization that provides emergency assistance, disaster relief, and education inside the United States.",
+                        TotalDonationAmount = 2000,
+                        GoalAmount = 10000,
+                        WebsiteUrl = "https://www.redcross.org/",
+                        LogoUrl = "https://www.redcross.org/content/dam/redcross/imported-images/redcross-logo.png.img.png"
+                    },
+                    new Charity()
+                    {
+                        AccountIdentifier = Guid.NewGuid(),
+                        Name = "Salvation Army",
+                        CharityInfo = "The Salvation Army is a Protestant Christian church and an international charitable organization. The organization reports a worldwide membership of over 1.7 million, consisting of soldiers, officers and adherents collectively known as Salvationists.",
+                        TotalDonationAmount = 3000,
+                        GoalAmount = 15000,
+                        WebsiteUrl = "https://www.salvationarmyusa.org/",
+                        LogoUrl = "https://static.salvationarmy.org/us-east-1/templates/symphony/static_resources/images/global/shield.svg"
+                    },
                 };
                 model.Charities = charityList;
                 Logger.DebugFormat($" {logPrefix} [GET] Controller/Index");
@@ -123,6 +150,63 @@ namespace DonationWidget.Controllers
 
             return accountResponse.Accounts;
 
+        }
+
+        public bool SendEmail()
+        {
+            bool isSent = false;
+
+            UserContactEmail emailContact =
+                CurrentUser.GetUserContact<UserContactEmail>(x => x.IsPrimary).FirstOrDefault()
+                ?? CurrentUser.GetUserContact<UserContactEmail>().FirstOrDefault();
+
+            string subject = "The Boys CU Donation Confirmation";
+            string body= "You succesfully donated some money to a charity. You're a really nice person <3.";
+            var v1 = this.CurrentBankIdentifier;
+            var v2 = CurrentBankName;
+            var v3 = CurrentUserIdentifier;
+            var v4 = TransportAgentMedium.Email;
+            
+            try
+            {
+                var result = NotificationRepository.SendToSpecificAddess(
+                        this.CurrentBankIdentifier,
+                        CurrentBankName,
+                        CurrentUserIdentifier,
+                        TransportAgentMedium.Email,
+                        emailContact.Email,
+                        subject,
+                        body,
+                        true,
+                        true);
+                if (result == null)
+                {
+                    throw new InvalidOperationException("SendToUser response returns null.");
+                }
+
+                if (result.Status != Status.Success)
+                {
+                    string errorMsg = string.Format(
+                        "SendEmail failed to send email message. User Identifier [{0}] Email Address: [{1}] Status [{2}] Error [{3}] ",
+                        new object[]
+                        {
+                    CurrentUserIdentifier.ToString(), emailContact.ToString(), result.Status.ToString(),
+                    result.Exception == null ? "" : result.Exception.Message
+                        });
+                    throw new InvalidOperationException(errorMsg);
+                }
+                else
+                {
+                    isSent = true;
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error("SendEmail failed.", e);
+                isSent = false;
+            }
+
+            return isSent;
         }
 
 
