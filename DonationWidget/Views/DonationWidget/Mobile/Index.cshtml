@@ -1,0 +1,26 @@
+﻿@using Alkami.Client.WebClient.Shared.Helpers
+@{
+    ViewBag.Title = @Html.SiteText("MobileTitle");
+    ViewBag.PageID = "page_contents";
+}
+
+@section StyleSheets{
+}
+
+@section Header {
+    <div class="titlebar">
+        <a id="nav_button" href="#" class="titlebar-button icon left">Menu</a>
+        <h1 class="truncate">@Html.SiteText("MobileTitle")</h1>
+    </div>
+}
+
+@section BodyScripts{
+	<script>
+        window.nativeHook.setNavBar({
+            text: '@Html.SiteText("MobileTitle")',
+            left: { button: 'drawer' }
+        });
+	</script>
+}
+
+Hello $displayname$

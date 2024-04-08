@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" type="text/css" href="gettingstarted.css" media="screen">
+    <title>Getting Started</title>
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <div id="logo"></div>
+            <h1>Getting Started</h1>
+            <h2>Alkami Widget</h2>
+        </div>
+        <div id="main_content">
+            <div id="lpanel">
+                <h1>Setup your widget</h1>
+                <p>The widget template creates an MVC structured class library project that includes references to the required NuGet packages</p>
+                <h2>First Steps</h2>
+                <p>Some things will still need to be completed:</p>
+                <ol>
+                    <li>Update the Alkami.Client and Alkami.Common packages. Look at "Installed Packages" under the NuGet Package Manager and update these versions to match the version of ORB you are targeting.</li>
+                    <li>Automated the execution of "install_widget.sql" script in the "Tools" directory, this will be inserting a few rows into a few tables of the DeveloperDynamic database related to widget. Check if your widget is present in the respective tables or not, if not, execute the script manually.</li>
+                    <li>Right click solution and select manage nuget packages</li>
+                    <li>Set the package source drop down to all</li>
+                    <li>Restore nuget packages, when prompted for credential put in your Alkami feed credentials</li>
+                    
+                    <li>Install nuget package Alkami.MicroServices.Accounts.Service.Client</li>
+                    <li>Install nuget package Alkami.MicroServices.Security.Client</li>
+                    
+                    <li>Rebuild project</li>
+                    <li>Once the project is built you should be able to navigate to your widget in the browser <a href="https://developer.dev.alkamitech.com/DonationWidget">  https://developer.dev.alkamitech.com/DonationWidget</a> </li>
+                </ol>
+
+                <h2>Submitting your widget</h2>
+                <p>Pre-compiling will only occur when you build your widget in "Release" mode. Before submitting your widget to Alkami, you will need to build your dll in "Release" mode</p>
+
+                <h2>Updating Packages</h2>
+                <p>Update the Alkami.Client and Alkami.Common NuGet packages as your staging environment is updated. Most times the libraries will be available before they are released to stage. Best practice is to stay in sync with your higher environments until a new Client or Common release is available for testing.</p>
+
+            </div>
+            <div id="rpanel">
+                <div>
+                    <h1>SDK Widget Resources</h1>
+                    <ol>
+                        <li><a target="_blank" href="https://confluence.alkami.com/display/SDKC/Samples+and+Tutorials">Samples and Tutorials</a><br />A collection of samples that demonstrate some of the basic actions commonly found in widgets</li>
+                        <li><a target="_blank" href="https://confluence.alkami.com/display/SDKC/Widget+Coding+Guidelines">Widget Coding Guidelines</a><br />A set of guidelines that developers should adhere to when implementing their widgets for Alkami deployment</li>
+                    </ol>
+                    <h1>Give us feedback</h1>
+                    <ul>
+                        <li><a target="_blank" href="mailto:sdksupport@alkamitech.com">Have a question? Have an idea or suggestion? Send us an email!</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

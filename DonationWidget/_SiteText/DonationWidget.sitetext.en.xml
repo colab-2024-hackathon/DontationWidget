@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+<SiteText xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <entries>
+    <entry Key="Title">$displayname$</entry>
+    <entry Key="MobileTitle">Mobile $displayname$</entry>
+  </entries>
+</SiteText>

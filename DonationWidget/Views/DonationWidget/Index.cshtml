@@ -1,0 +1,24 @@
+﻿@using Alkami.Client.WebClient.Shared.Helpers
+@using System.Web.Mvc.Html
+@using Alkami.Client.Framework.Utility
+@section TitleContentPlaceholder{
+    @Html.SiteText("Title")
+}
+
+@section StyleSheetContentPlaceholder{
+
+}
+
+@section JavaScriptIncludeContentPlaceholder{
+
+}
+
+ 
+@{var url = "DonationWidget/Accounts";}
+<a href=@url>
+    <button class="iris-button iris-button--primary">
+        <span class="iris-button__text">Accounts</span>
+    </button>
+</a>
+
+    Welcome to a new widget!

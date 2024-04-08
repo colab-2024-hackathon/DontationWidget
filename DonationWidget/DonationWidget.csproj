@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{31E9F5A4-937C-497F-98EA-82BCA8A5F167}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DonationWidget</RootNamespace>
+    <AssemblyName>DonationWidget</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Alkami.Api.Common, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Api.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Bank.Common, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Bank.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Bank.Contracts, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Bank.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Common, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Common.Utility, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Common.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Content.Contracts, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Content.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Content.Data, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Content.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Core.Contracts, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Core.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Core.Data, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Core.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.DecisionEngine, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.DecisionEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.DecisionEngine.FactSheets, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.DecisionEngine.FactSheets.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.MessageCenter.Contracts, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.MessageCenter.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Notification, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Notification.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Notification.Contracts, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Notification.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Notification.Data, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Notification.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Providers.AddressValidation.Contracts, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Providers.AddressValidation.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Providers.Core.Contracts, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Providers.Core.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Providers.eStatements.Contracts, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Providers.eStatements.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Providers.Risk.Alkami, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Providers.Risk.Alkami.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Providers.Risk.Shared, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Providers.Risk.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Providers.Shared, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Providers.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Radium.Jobs, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Radium.Jobs.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.App.Tenant.Data, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.App.Tenant.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.BillingRecord.Models, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.BillingRecord.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Cache, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Common, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Framework, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Management.Bank, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Management.Bank.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Messages, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Messages.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Services, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Services.Audit, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Services.Audit.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Services.Bank, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Services.Bank.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Services.Content, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Services.Content.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Services.Core, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Services.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Services.Exception, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Services.Exception.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Services.MessageCenter, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Services.MessageCenter.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Services.Nag, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Services.Nag.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.Services.Security, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.Services.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Client.WebClient.Shared, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.2023.4.0.3\lib\net472\Alkami.Client.WebClient.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Common, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Contracts, Version=4.2.0.909, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Core.4.2.0\lib\net462\Alkami.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Data.Access, Version=4.2.0.909, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Core.4.2.0\lib\net462\Alkami.Data.Access.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Data.Validations, Version=4.2.0.909, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Core.4.2.0\lib\net462\Alkami.Data.Validations.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Exceptions, Version=4.2.0.909, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Core.4.2.0\lib\net462\Alkami.Exceptions.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.ExternalMessaging, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.ExternalMessaging.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Ioc, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Ioc.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Monitoring, Version=2.9.0.974, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Monitoring.2.9.0\lib\net462\Alkami.Monitoring.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security, Version=4.2.0.909, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Core.4.2.0\lib\net462\Alkami.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security.Common, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Security.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security.Common.Service, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Security.Common.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security.IP-STS.Entrust, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Security.IP-STS.Entrust.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security.Provider, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Security.Provider.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security.Provider.Shared.Entrust, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Security.Provider.Shared.Entrust.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security.Provider.TokenTranslator, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Security.Provider.TokenTranslator.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security.Provider.User.Entrust, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Security.Provider.User.Entrust.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security.RP-STS.Contracts, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Security.RP-STS.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security.SecurityManagement.Contracts, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Security.SecurityManagement.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.Security.Web, Version=2023.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Common.2023.4.0.3\lib\net472\Alkami.Security.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.1.3.42154, Culture=neutral, PublicKeyToken=3a9cab8f8d22bfb7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.1.3.42154\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=2.5.1.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.2.5.2\lib\NET35\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.1.0.1\lib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle, Version=3.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.41.2, Culture=neutral, PublicKeyToken=cab60358ab4081ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.3.0.0.4000\lib\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebToolkit, Version=4.1.2.1846, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.WebToolkit.4.1.2\lib\net462\WebToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="mscorlib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Tools\PostBuild.ps1" />
+    <None Include="DonationWidget.nuspec" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WidgetDescription.cs" />
+    <Compile Include="Models\DonationWidgetModel.cs" />
+    <Compile Include="Models\AccountsModel.cs" />
+    <Compile Include="Controllers\MobileDonationWidgetController.cs" />
+    <Compile Include="Controllers\DonationWidgetController.cs" />
+    <Compile Include="Helpers\AlkamiHelpers.cs" />
+    <Content Include="AlkamiManifest.xml" />
+    <Content Include="_SiteText\DonationWidget.sitetext.en.xml" />
+    <Content Include="Views\DonationWidget\Mobile\Error.cshtml" />
+    <Content Include="Views\DonationWidget\Mobile\Index.cshtml" />
+    <Content Include="Views\DonationWidget\Error.cshtml" />
+    <Content Include="Views\DonationWidget\Index.cshtml" />
+    <Content Include="Views\DonationWidget\Accounts.cshtml" />
+    <Content Include="Scripts\DonationWidget.js" />
+    <Content Include="packages.config" />
+    <Content Include="sem.ver" />
+    <None Include="Tools\install_widget.sql" />
+    <None Include="Tools\chocolateyInstall.ps1" />
+    <None Include="Tools\chocolateyUninstall.ps1" />
+    <None Include="Doc\GettingStarted.html" />
+    <None Include="Doc\gettingstarted.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+    <Folder Include="Styles\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if EXIST "$(ProjectDir)\obj\CodeGen\" (rmdir /s /q "$(ProjectDir)\obj\CodeGen\")</PreBuildEvent>
+    <PostBuildEvent>
+if EXIST "$(ProjectDir)tools\PostBuild.ps1" (powershell.exe -NonInteractive -command "$(ProjectDir)tools\PostBuild.ps1" '$(ProjectName)' '$(ProjectDir)')</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\RazorGenerator.MsBuild.2.5.0\build\RazorGenerator.MsBuild.targets" Condition="'$(Configuration)' == 'Release' AND Exists('..\packages\RazorGenerator.MsBuild.2.5.0\build\RazorGenerator.MsBuild.targets')" />
+</Project>

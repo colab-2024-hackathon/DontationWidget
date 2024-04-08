@@ -1,0 +1,12 @@
+﻿@using Alkami.Client.WebClient.Shared.Helpers
+@using System.Web.Mvc.Html
+@using Alkami.Client.Framework.Utility
+@model Alkami.Client.Framework.Mvc.BaseModel
+@section TitleContentPlaceHolder {
+    @Html.SiteText("Title")
+}
+<div class="blank-slate-message">
+    <h3>An unexpected error occurred. Please try again later.</h3>
+    <p>Please use the secure message system to submit any questions or concerns.</p>
+    <a href="/MessageCenter/Compose" class="primary button">Send a Message</a>
+</div>

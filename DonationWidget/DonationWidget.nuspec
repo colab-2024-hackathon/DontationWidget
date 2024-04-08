@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package>
+	<metadata>
+		<id>DonationWidget</id>
+		<version>1.0.0</version>
+		<title>DonationWidget</title>
+		<authors>The Boys</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Donation Widget</description>
+		<releaseNotes>Put any release notes you like here.</releaseNotes>
+		<tags>SDK WIDGET</tags>
+		<copyright>Copyright ©  2021</copyright>
+		<dependencies>
+			
+		</dependencies>
+	</metadata>
+	<files>
+		<!-- The following defines where to find the files for packaging and what to exclude-->
+		<file src="tools\chocolateyInstall.ps1" target="tools" />
+		<file src="tools\chocolateyUninstall.ps1" target="tools" />
+		<file src="AlkamiManifest.xml" target="AlkamiManifest.xml" />
+		<file src="**\*.*" target="src" exclude="**\obj\**\*.*;**\.vs\**\*.*;**\bin\**\*.*;**\packages\**\*.*;**\.nuget\**\*.*;**\.git\**\*.*;**\.gitignore;**\node_modules\**\*.*;**\.suo;**\.user;**\Tests\**\*.*;**\Test\**\*.*;**\UnitTest\**\*.*;**\UnitTests\**\*.*;**\tools\**\chocolatey*.ps1;**\web.config" />
+
+		<!-- bin files | define the libraries that should be a part of this package -->
+		<!-- When adding files make sure that all reference use target="lib". -->
+		<!-- Failure place the bin files in a single folder will result in incomplete deployments-->
+		<file src="bin\DonationWidget.*" target="lib" exclude="**\*.config"/>
+		
+		
+		<file src="bin\Alkami.MicroServices.Accounts.*" target="lib" exclude="**\*.config"/>
+		<file src="bin\Alkami.MicroServices.Security.*" target="lib" exclude="**\*.config"/>
+		
+		<!-- WebClient content -->
+		<file src="**\Scripts\" target="content\Areas\App" exclude="**\web.config" />
+		<file src="**\Styles\" target="content\Areas\App" exclude="**\*.scss;**\web.config" />
+		<file src="**\Views\" target="content\Areas\App" exclude="**\obj\**\*.*;**\web.config" />
+		<file src="**\Images\" target="content\Areas\App" exclude="**\web.config" />
+		<file src="**\_SiteText\" target="content\Areas\App" exclude="**\*.xx.xml;**\web.config"/>
+	</files>
+</package>

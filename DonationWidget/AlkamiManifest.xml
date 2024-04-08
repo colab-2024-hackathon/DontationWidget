@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<packageManifest>
+    <version>1.0</version>
+    <general>
+        <creatorCode>DonationWidget</creatorCode>
+        <compound>DonationWidget_SDK</compound>
+        <element>DonationWidget</element>
+        <componentType>Widget</componentType>
+
+		<!--SDK clients should add their BankIdentifier(s) in this list. No quotes or brackets - {} - are required. Dashes are encouraged.-->
+        <bankIdentifiers>
+            <bankIdentifier name="DonationWidget">78554577-9DE6-43CD-9085-5868977156D1</bankIdentifier>
+        </bankIdentifiers>
+
+	</general>
+
+    <!-- Widget -->
+    <widgetManifest>
+		<widgetName>DonationWidget</widgetName>
+		<description>Donation Widget</description>
+        <!-- <widgetInstall>Client|Admin|Generic</widgetInstall> - Generic means this gets installed in both Admin and Client with v1.0 manifests -->
+        <widgetInstall>Client</widgetInstall>
+        <areaName>DonationWidget</areaName>
+        <assemblyInfo>DonationWidget</assemblyInfo>
+		<!-- <displaySettings>Desktop|Mobile|Tablet|DesktopMobile|All</displaySettings> -->
+        <displaySettings>All</displaySettings>
+        <iconName>piggy</iconName>
+    </widgetManifest>
+</packageManifest>
