@@ -1,0 +1,123 @@
+﻿@using Alkami.Client.WebClient.Shared.Helpers
+@using System.Web.Mvc.Html
+@using Alkami.Client.Framework.Utility
+@section TitleContentPlaceholder{
+    @Html.SiteText("Title")
+}
+
+@section StyleSheetContentPlaceholder{
+
+}
+
+@section JavaScriptIncludeContentPlaceholder{
+
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            position: relative;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .panel {
+            width: 50%;
+            background-color: #e0e0e0;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            height: 400px;
+            position: absolute;
+            left: 36%;
+            top: 50%;
+            transform: translate(-25%, -50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* gap between rows */
+        }
+
+        .row-pane {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            flex: 1; 
+        }
+
+        .label {
+            font-size: 16px; 
+            color: black;
+        }
+
+        .label-text {
+            font-size: 18px;
+            color: black;
+            text-align: center; 
+        }
+
+        .print-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #62c369;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .print-button:hover {
+                background-color: #2e856e;
+            }
+
+            .print-button:active {
+                background-color: #1e624f;
+            }
+    </style>
+</head>
+<body>
+    <div class="title">
+        Donation Confirmation
+    </div>
+    <div class="panel">
+        <div class="row-pane">
+            <div class="label">Donation Amount:</div>
+            <div class="label-text">$100.00</div>
+        </div>
+        <div class="row-pane">
+            <div class="label">Name of Organization:</div>
+            <div class="label-text">Mo Money Mo Problems</div>
+        </div>
+        <div class="row-pane">
+            <div class="label">Frequency of Donation:</div>
+            <div class="label-text">One Time Donation</div>
+        </div>
+        <div class="row-pane">
+            <div class="label">New Account Balance:</div>
+            <div class="label-text">$57,659.24</div>
+        </div>
+    </div>
+    <button class="print-button" onclick="alert('Receipt is being printed')">Print</button>
+</body>

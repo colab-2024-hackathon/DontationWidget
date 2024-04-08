@@ -431,6 +431,7 @@
     <None Include="Tools\chocolateyUninstall.ps1" />
     <None Include="Doc\GettingStarted.html" />
     <None Include="Doc\gettingstarted.css" />
+    <Content Include="Views\DonationWidget\ConfirmationPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
