@@ -29,6 +29,7 @@
 		
 		<file src="bin\Alkami.MicroServices.Accounts.*" target="lib" exclude="**\*.config"/>
 		<file src="bin\Alkami.MicroServices.Security.*" target="lib" exclude="**\*.config"/>
+    <file src="bin\Alkami.MicroServices.Transfers.*" target="lib" exclude="**\*.config"/>
 		
 		<!-- WebClient content -->
 		<file src="**\Scripts\" target="content\Areas\App" exclude="**\web.config" />

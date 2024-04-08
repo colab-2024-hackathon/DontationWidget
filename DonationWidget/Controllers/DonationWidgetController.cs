@@ -13,11 +13,20 @@ using System.Web.Mvc;
 using WebToolkit;
 using Account = Alkami.MicroServices.Accounts.Data.Account;
 using Exception = System.Exception;
-
 using Alkami.Client.Services.Notification.Repository;
 using Alkami.App.Notification.Contracts;
 using Alkami.Security.Common.DataContracts;
 using Alkami.Client.Messages;
+using Alkami.MicroServices.Accounts.Contracts.Filters_And_Mappers;
+using Alkami.MicroServices.Accounts.Contracts.Requests;
+using Alkami.MicroServices.Accounts.Contracts;
+using Alkami.MicroServices.Accounts.Service.Client;
+using Alkami.MicroServices.Transfers.CoreProxy.Contracts;
+using Alkami.MicroServices.Transfers.CoreProxy.Service;
+using Alkami.MicroServices.Transfers.CoreProxy.Contracts.Requests;
+using Alkami.MicroServices.Transfers.CoreProxy.Contracts.Models;
+using System.IO;
+using Alkami.MicroServices.Accounts.Service.Client;
 
 //using Alkami.Client.Framework.Utility;//used when widget setting is uncommented below
 
@@ -27,6 +36,10 @@ namespace DonationWidget.Controllers
     [ClaimsAuthorizationFilter(PermissionNames.NoPermissions)]
     public class DonationWidgetController : BaseController
     {
+
+        public static Func<IAccountServiceContract> accountsService = () => new AccountServiceClient();
+
+        public static Func<ITransfersCoreProxyServiceContract> TransfersCoreProxyServiceFactory = () => new Alkami.MicroServices.Transfers.CoreProxy.Service.Client.ServiceClient();
 
 
         /// <summary>
@@ -255,9 +268,106 @@ namespace DonationWidget.Controllers
 
         }
 
+        private List<DonationTransactionModel> ReadLog()
+        {
+            string filepath = "C:\\Database\\Transactions.txt";
+            var transactions = new List<DonationTransactionModel>();
+            using (var reader = new StreamReader(filepath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    var parts = line.Split(',');
+                    if (parts.Length == 3)
+                    {
+                        string accountID = parts[0];
 
+                        var transaction = new DonationTransactionModel
+                        {
+                            FromAccount = GetAnAccount((long)Convert.ToDouble(accountID)),
+                            ToCharity = parts[1],
+                            Amount = decimal.Parse(parts[2])
+                        };
+                        transactions.Add(transaction);
+                    }
+                }
+            }
+            return transactions;
+        }
+        private void LogTransfer(DonationTransactionModel transaction)
+        {
+            string filepath = "C:\\Database\\Transactions.txt";
 
+            {
+                using (var writer = new StreamWriter(filepath))
+                {
+                    var line = $"{transaction.FromAccount.AccountIdentifier},{transaction.ToCharity},{transaction.Amount}";
+                    writer.WriteLine(line);
+                }
+            }
+        }
+        private async void TransferFunds(DonationTransactionModel transaction)
+        {
+            var transferRequest = new AddTransferRequest
+            {
+                ItemList = new List<TransferRequest>
+    {
+        new TransferRequest
+        {
+            Amount = transaction.Amount,
+            Description = "Donation to " + transaction.ToCharity,
+            DestinationAccount = new TransferAccount
+            {
+                AccountIdentifier = Guid.Parse("189DD151-CCA9-419F-B9C8-C6FDE379B6A4"),
+                TransactionCode = "9999",
+            },
+            SourceAccount = new TransferAccount
+            {
+                AccountIdentifier = transaction.FromAccount.AccountIdentifier,
+                TransactionCode = "1111",
+            },
+            EffectiveDate = DateTime.UtcNow,
+            ShouldTriggerAccountSync = true,
+            TransferType = TransferType.Standard,
+        },
+    },
+            };
+            this.AugmentRequest(transferRequest);
+            var response = AsyncHelper.RunSync(() => TransfersCoreProxyServiceFactory().AddTransferAsync(transferRequest));
+            LogTransfer(transaction);
+            return;
+        }
 
+        Account GetAnAccount(long accountId)
+        {
+            Account result = new Account();
+            var accountRequest = new GetAccountRequest()
+            {
+                Filter = new AccountFilter() { Ids = new List<long> { accountId }, IncludeExternal = true },
+                Mapping = new AccountMapper()
+                {
+                    IncludeAccountType = true,
+                    IncludeAccountTypeFields = null,
+                    IncludeRoutingInfo = true,
+                    AccountMaskSettings = new AccountMaskSettings()
+                    {
+                        FormatOnlyAccountHolder = false,
+                        JoinAccountHolderNumberFormatString = BankSettings.GetSettingOrDefault(BankSettingName.JoinAccountHolderNumberFormatString, "{0}{1}"),
+                        PadOutput = false
+                    }
+                }
+            };
+
+            this.AugmentRequest(accountRequest);
+
+            // Get the account from the Accounts microservice
+            var accountsResponse = AsyncHelper.RunSync(() => accountsService().GetAccountAsync(accountRequest));
+
+            // Because we are filtering by accountId, there should always only be one account under this criteria
+            if (accountsResponse.Accounts != null && accountsResponse.Accounts.Count == 1)
+                result = accountsResponse.Accounts[0];
+            return result;
+        }
 
 
     }

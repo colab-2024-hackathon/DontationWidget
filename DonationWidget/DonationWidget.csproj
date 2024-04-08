@@ -217,6 +217,30 @@
     <Reference Include="Alkami.MicroServices.Security.Service.Client.2.40, Version=2.40.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Alkami.MicroServices.Security.Client.2.40.0\lib\net472\Alkami.MicroServices.Security.Service.Client.2.40.dll</HintPath>
     </Reference>
+    <Reference Include="Alkami.MicroServices.Settings.Contracts.4.7, Version=4.7.1.3719, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Settings.Contracts.4.7.0\lib\net452\Alkami.MicroServices.Settings.Contracts.4.7.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.MicroServices.Settings.Data.4.7, Version=4.7.1.3719, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Settings.Contracts.4.7.0\lib\net452\Alkami.MicroServices.Settings.Data.4.7.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.MicroServices.Settings.Data.Validations.4.7, Version=4.7.1.3719, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Settings.Contracts.4.7.0\lib\net452\Alkami.MicroServices.Settings.Data.Validations.4.7.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.MicroServices.Settings.ProviderBased.Contracts, Version=4.7.6.3789, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Settings.ProviderBased.Contracts.4.7.6\lib\net452\Alkami.MicroServices.Settings.ProviderBased.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.MicroServices.Settings.ProviderBasedClient, Version=4.7.6.3789, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Settings.ProviderBasedClient.4.7.6\lib\net452\Alkami.MicroServices.Settings.ProviderBasedClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.MicroServices.Settings.Service.Client.4.7, Version=4.7.1.3719, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Settings.Client.4.7.0\lib\net452\Alkami.MicroServices.Settings.Service.Client.4.7.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.MicroServices.Transfers.CoreProxy.Contracts.1.5, Version=1.5.0.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Transfers.CoreProxy.Contracts.1.5.0\lib\net48\Alkami.MicroServices.Transfers.CoreProxy.Contracts.1.5.dll</HintPath>
+    </Reference>
+    <Reference Include="Alkami.MicroServices.Transfers.CoreProxy.Service.Client.1.5, Version=1.5.0.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.MicroServices.Transfers.CoreProxy.Client.1.5.0\lib\net48\Alkami.MicroServices.Transfers.CoreProxy.Service.Client.1.5.dll</HintPath>
+    </Reference>
     <Reference Include="Alkami.Monitoring, Version=2.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Alkami.Monitoring.2.11.0\lib\net462\Alkami.Monitoring.dll</HintPath>
     </Reference>
@@ -412,6 +436,7 @@
     <None Include="Tools\PostBuild.ps1" />
     <None Include="DonationWidget.nuspec" />
     <Compile Include="Models\Charity.cs" />
+    <Compile Include="Models\DonationTransactionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WidgetDescription.cs" />
     <Compile Include="Models\DonationWidgetModel.cs" />
