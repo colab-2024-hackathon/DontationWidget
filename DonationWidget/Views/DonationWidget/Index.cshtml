@@ -41,6 +41,10 @@
                 #charityInfo a:hover {
                     text-decoration: underline;
                 }
+
+        .form-container label {
+            font-weight: bold;
+        }
     </style>
 }
 
@@ -71,6 +75,7 @@
             </div>
             <!-- Second column-->
             <div class="col-sm">
+
                 <h2 class="mar-bottom--sm">Select an account below:</h2>
                 <div class="iris-dropdown" id="account-dropdown" placeholder="Select an account" data-size="large">
                     <ul class="iris-options-list">
@@ -111,6 +116,45 @@
                         <input type="text" class="iris-textfield__input" id="donationAmount" name="DonationAmount" placeholder="Enter donation amount" required>
                     </div>
                 </div>
+                <div class="mar-bottom--lg" style="display: flex; align-items: center;">
+                    <label for="recurringWithdrawalSwitch" style="margin-right: 10px;">Monthly Donation:</label>
+                    <div class="iris-toggle">
+                        <input class="iris-toggle__input" type="checkbox" id="recurringWithdrawalSwitch" />
+                        <label class="iris-toggle__label" for="recurringWithdrawalSwitch" aria-label="Enable Recurring Withdrawal">
+                            <span class="iris-toggle__left" aria-hidden="true">Off</span>
+                            <span class="iris-toggle__inner"></span>
+                            <span class="iris-toggle__right" aria-hidden="true">On</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="datePickerContainer" class="mar-bottom--lg" style="display: none;">
+                    <div class="mar-bottom--lg">
+                        <label for="recurringDate" class="mar-bottom--md block">Start Date:</label>
+                        <div class="iris-textfield" data-icon-position="trailing">
+                            <input type="date" id="recurringDate" class="iris-textfield__input" placeholder="mm-dd-yyyy" />
+                            <button class="iris-textfield__icon font-icon-calendar" aria-label="Pick a date"></button>
+                        </div>
+                    </div>
+
+                    <div class="mar-bottom--lg" style="display: flex; align-items: center;">
+                        <label for="endDateSwitch" style="margin-right: 10px;">End Date:</label>
+                        <div class="iris-toggle">
+                            <input class="iris-toggle__input" type="checkbox" id="endDateSwitch" />
+                            <label class="iris-toggle__label" for="endDateSwitch" aria-label="Enable End Date">
+                                <span class="iris-toggle__left" aria-hidden="true">Off</span>
+                                <span class="iris-toggle__inner"></span>
+                                <span class="iris-toggle__right" aria-hidden="true">On</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="endDatePickerContainer" class="mar-bottom--lg" style="display: none;">
+                        <div class="iris-textfield" data-icon-position="trailing">
+                            <input type="date" id="endDate" class="iris-textfield__input" placeholder="mm-dd-yyyy" />
+                            <button class="iris-textfield__icon font-icon-calendar" aria-label="Pick an end date"></button>
+                        </div>
+                    </div>
+                </div>
                 <button type="submit" class="iris-button iris-button--primary">
                     <span class="iris-button__text">Submit</span>
                 </button>
@@ -119,40 +163,58 @@
     </div>
 }
     <script>
-    var charities = @Html.Raw(Json.Encode(Model.Charities));
+        var charities = @Html.Raw(Json.Encode(Model.Charities));
 
-    document.getElementById('charityDropdown').addEventListener('iris.dropdown.change', function(e) {
-        var selectedCharity = e.detail.value;
-        var charity = charities.find(c => c.AccountIdentifier.toString() === selectedCharity);
+        document.getElementById('charityDropdown').addEventListener('iris.dropdown.change', function(e) {
+            var selectedCharity = e.detail.value;
+            var charity = charities.find(c => c.AccountIdentifier.toString() === selectedCharity);
 
-        if (charity) {
-            var charityInfoDiv = document.getElementById('charityInfo');
-            var formattedTotalDonationAmount = parseFloat(charity.TotalDonationAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            var formattedGoalAmount = parseFloat(charity.GoalAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            charityInfoDiv.innerHTML = `
-                <h2>${charity.Name}</h2>
-                <img src="${charity.LogoUrl}" alt="${charity.Name} Logo">
-                <p>${charity.CharityInfo}</p>
-                <a target='_blank' href="${charity.WebsiteUrl}">Visit Website</a>
-                <div class="iris-progress-bar iris-progress-bar--info">
-                    <h3 class="iris-progress-bar__title font-weight--500">${formattedTotalDonationAmount}</h3>
-                    <progress class="iris-progress-bar__meter"
-                              role="progressbar"
-                              aria-valuemin="0"
-                              aria-valuenow="${formattedTotalDonationAmount}"
-                              aria-valuemax="${formattedGoalAmount}"
-                              aria-valuetext="$350 out of ${formattedTotalDonationAmount} required"
-                              value="${parseFloat(formattedTotalDonationAmount.replace(/[$,]/g, ""))}"
-                              max="${parseFloat(formattedGoalAmount.replace(/[$,]/g, ""))}">
-                    </progress>
-                    <span class="iris-progress-bar__secondary-info font-size--xs">${formattedGoalAmount} required</span>
-                </div>
-            `;
-            charityInfoDiv.style.display = 'block';
-        } else {
-            console.error('No matching charity found for selected value: ' + selectedCharity);
-        }
-    });
+            if (charity) {
+                var charityInfoDiv = document.getElementById('charityInfo');
+                var formattedTotalDonationAmount = parseFloat(charity.TotalDonationAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                var formattedGoalAmount = parseFloat(charity.GoalAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                charityInfoDiv.innerHTML = `
+                    <h2>${charity.Name}</h2>
+                    <img src="${charity.LogoUrl}" alt="${charity.Name} Logo">
+                    <p>${charity.CharityInfo}</p>
+                    <a target='_blank' href="${charity.WebsiteUrl}">Visit Website</a>
+                    <div class="iris-progress-bar iris-progress-bar--info">
+                        <h3 class="iris-progress-bar__title font-weight--500">${formattedTotalDonationAmount}</h3>
+                        <progress class="iris-progress-bar__meter"
+                                  role="progressbar"
+                                  aria-valuemin="0"
+                                  aria-valuenow="${formattedTotalDonationAmount}"
+                                  aria-valuemax="${formattedGoalAmount}"
+                                  aria-valuetext="$350 out of ${formattedTotalDonationAmount} required"
+                                  value="${parseFloat(formattedTotalDonationAmount.replace(/[$,]/g, ""))}"
+                                  max="${parseFloat(formattedGoalAmount.replace(/[$,]/g, ""))}">
+                        </progress>
+                        <span class="iris-progress-bar__secondary-info font-size--xs">${formattedGoalAmount} required</span>
+                    </div>
+                `;
+                charityInfoDiv.style.display = 'block';
+            } else {
+                console.error('No matching charity found for selected value: ' + selectedCharity);
+            }
+        });
+
+        document.getElementById('recurringWithdrawalSwitch').addEventListener('change', function() {
+            var datePickerContainer = document.getElementById('datePickerContainer');
+            if (this.checked) {
+                datePickerContainer.style.display = "block";
+            } else {
+                datePickerContainer.style.display = "none";
+            }
+        });
+
+        document.getElementById('endDateSwitch').addEventListener('change', function() {
+            var endDatePickerContainer = document.getElementById('endDatePickerContainer');
+            if (this.checked) {
+                endDatePickerContainer.style.display = "block";
+            } else {
+                endDatePickerContainer.style.display = "none";
+            }
+        });
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

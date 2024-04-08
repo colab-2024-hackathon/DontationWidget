@@ -126,6 +126,11 @@ namespace DonationWidget.Controllers
             return View("Accounts", model);
         }
 
+        public ActionResult ConfirmationPage()
+        {
+            return View("ConfirmationPage");
+        }
+
         private List<Account> GetAccounts(long userId)
         {
             Logger.DebugFormat($" {logPrefix} GetAccounts Controller method called userId {userId}");
