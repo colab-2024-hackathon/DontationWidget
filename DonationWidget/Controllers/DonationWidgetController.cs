@@ -59,7 +59,27 @@ namespace DonationWidget.Controllers
                         GoalAmount=5000,
                         WebsiteUrl="https://www.unitedway.org/",
                         LogoUrl="https://www.unitedway.org/assets/img/united-way-lock-up-rgb-cropped.jpg"
-                    }
+                    },
+                    new Charity()
+                    {
+                        AccountIdentifier = Guid.NewGuid(),
+                        Name = "American Red Cross",
+                        CharityInfo = "The American Red Cross is a humanitarian organization that provides emergency assistance, disaster relief, and education inside the United States.",
+                        TotalDonationAmount = 2000,
+                        GoalAmount = 10000,
+                        WebsiteUrl = "https://www.redcross.org/",
+                        LogoUrl = "https://www.redcross.org/content/dam/redcross/imported-images/redcross-logo.png.img.png"
+                    },
+                    new Charity()
+                    {
+                        AccountIdentifier = Guid.NewGuid(),
+                        Name = "Salvation Army",
+                        CharityInfo = "The Salvation Army is a Protestant Christian church and an international charitable organization. The organization reports a worldwide membership of over 1.7 million, consisting of soldiers, officers and adherents collectively known as Salvationists.",
+                        TotalDonationAmount = 3000,
+                        GoalAmount = 15000,
+                        WebsiteUrl = "https://www.salvationarmyusa.org/",
+                        LogoUrl = "https://static.salvationarmy.org/us-east-1/templates/symphony/static_resources/images/global/shield.svg"
+                    },
                 };
                 model.Charities = charityList;
                 Logger.DebugFormat($" {logPrefix} [GET] Controller/Index");

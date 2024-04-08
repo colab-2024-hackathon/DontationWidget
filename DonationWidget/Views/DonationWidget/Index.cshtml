@@ -7,7 +7,41 @@
 }
 
 @section StyleSheetContentPlaceholder{
+    <style>
+        #charityInfo {
+            display: none;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
+            #charityInfo h2 {
+                color: #333;
+                margin-bottom: 10px;
+            }
+
+            #charityInfo img {
+                margin-bottom: 10px;
+            }
+
+            #charityInfo p {
+                color: #666;
+                line-height: 1.6;
+                margin-bottom: 10px;
+            }
+
+            #charityInfo a {
+                color: #007BFF;
+                text-decoration: none;
+            }
+
+                #charityInfo a:hover {
+                    text-decoration: underline;
+                }
+    </style>
 }
 
 @section JavaScriptIncludeContentPlaceholder{
@@ -21,4 +55,54 @@
         <span class="iris-button__text">Accounts</span>
     </button>
 </a>
+
     Welcome to a new widget!
+
+<div class="container" style="margin-top:20px;">
+    <div class="row">
+        <div class="col-sm">
+            <div class="mar-bottom--md">
+                <h2 class="mar-bottom--sm">Select a charity below:</h2>
+                <div class="iris-dropdown ecu-dropdown" id="charityDropdown" name="dropdown" placeholder="Select a charity">
+                    <ul class="iris-options-list">
+                        @foreach (var charity in @Model.Charities)
+                        {
+                            <li class="iris-option" data-value="@charity.AccountIdentifier.ToString()"> @charity.Name </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div id="charityInfo">
+            </div>
+        </div>
+        <div class="col-sm">
+            <!-- Enter more content here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    var charities = @Html.Raw(Json.Encode(Model.Charities));
+
+    document.getElementById('charityDropdown').addEventListener('iris.dropdown.change', function(e) {
+        var selectedCharity = e.detail.value;
+        var charity = charities.find(c => c.AccountIdentifier.toString() === selectedCharity);
+
+        if (charity) {
+            var charityInfoDiv = document.getElementById('charityInfo');
+            var formattedTotalDonationAmount = parseFloat(charity.TotalDonationAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            var formattedGoalAmount = parseFloat(charity.GoalAmount).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            charityInfoDiv.innerHTML = `
+                <h2>${charity.Name}</h2>
+                <img src="${charity.LogoUrl}" alt="${charity.Name} Logo">
+                <p>${charity.CharityInfo}</p>
+                <p>Total Donations Given: ${formattedTotalDonationAmount}</p>
+                <p>Goal Amount: ${formattedGoalAmount}</p>
+                <a target='_blank' href="${charity.WebsiteUrl}">Visit Website</a>
+            `;
+            charityInfoDiv.style.display = 'block';
+        } else {
+            console.error('No matching charity found for selected value: ' + selectedCharity);
+        }
+    });
+</script>
