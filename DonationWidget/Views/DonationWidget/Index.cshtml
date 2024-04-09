@@ -216,6 +216,22 @@
                 endDatePickerContainer.style.display = "none";
             }
         });
+
+        // Get the input element
+        const input = document.getElementById('donationAmount');
+        // Add event listener for input
+        input.addEventListener('input', function(event) {
+            const value = this.value.replace(/[^0-9.]/g, '');
+            this.value = '$' + value
+        });
+        input.addEventListener('blur', function(event) {
+            const value = this.value.replace(/[^0-9.]/g, '');
+            this.value = '$' + parseFloat(value).toLocaleString('en-US', {
+                style: 'decimal',
+                maximumFractionDigits: 2,
+                minimumFractionDigits: 2
+            });
+        });
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
