@@ -445,6 +445,7 @@
     <Compile Include="Controllers\DonationWidgetController.cs" />
     <Compile Include="Helpers\AlkamiHelpers.cs" />
     <Content Include="AlkamiManifest.xml" />
+    <Content Include="Images\DonationBanner.png" />
     <Content Include="_SiteText\DonationWidget.sitetext.en.xml" />
     <Content Include="Views\DonationWidget\Mobile\Error.cshtml" />
     <Content Include="Views\DonationWidget\Mobile\Index.cshtml" />
@@ -462,7 +463,6 @@
     <Content Include="Views\DonationWidget\ConfirmationPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
     <Folder Include="Styles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -53,6 +53,7 @@
 }
 
 <div class="widget-info">@Html.Raw(Html.SiteText("WidgetInfo"))</div>
+<img src="@Url.Content("~/Images/DonationBanner.jpg")" alt="Donation Banner" />
 
 @using (Html.BeginForm("Donate", "DonationWidgetController", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -162,7 +163,7 @@
         </div>
     </div>
 }
-    <script>
+<script>
         var charities = @Html.Raw(Json.Encode(Model.Charities));
 
         document.getElementById('charityDropdown').addEventListener('iris.dropdown.change', function(e) {
@@ -215,35 +216,35 @@
                 endDatePickerContainer.style.display = "none";
             }
         });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Listen for changes on the charity dropdown
-            document.getElementById('charityDropdown').addEventListener('click', function (e) {
-                if (e.target && e.target.matches("li.iris-option")) {
-                    var selectedCharity = e.target.getAttribute('data-value');
-                    document.getElementById('selectedCharity').value = selectedCharity;
-                }
-            });
-
-            // Listen for changes on the account dropdown
-            document.getElementById('account-dropdown').addEventListener('click', function (e) {
-                if (e.target && e.target.matches("li.iris-option")) {
-                    var selectedAccount = e.target.getAttribute('data-value');
-                    document.getElementById('selectedAccount').value = selectedAccount;
-                }
-            });
-
-            // Initialize charity information on page load if a default selection exists
-            var initialCharity = document.querySelector('#charityDropdown .iris-option');
-            if (initialCharity) {
-                initialCharity.click();
-            }
-
-            // Initialize account information on page load if a default selection exists
-            var initialAccount = document.querySelector('#account-dropdown .iris-option');
-            if (initialAccount) {
-                initialAccount.click();
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Listen for changes on the charity dropdown
+        document.getElementById('charityDropdown').addEventListener('click', function (e) {
+            if (e.target && e.target.matches("li.iris-option")) {
+                var selectedCharity = e.target.getAttribute('data-value');
+                document.getElementById('selectedCharity').value = selectedCharity;
             }
         });
-    </script>
+
+        // Listen for changes on the account dropdown
+        document.getElementById('account-dropdown').addEventListener('click', function (e) {
+            if (e.target && e.target.matches("li.iris-option")) {
+                var selectedAccount = e.target.getAttribute('data-value');
+                document.getElementById('selectedAccount').value = selectedAccount;
+            }
+        });
+
+        // Initialize charity information on page load if a default selection exists
+        var initialCharity = document.querySelector('#charityDropdown .iris-option');
+        if (initialCharity) {
+            initialCharity.click();
+        }
+
+        // Initialize account information on page load if a default selection exists
+        var initialAccount = document.querySelector('#account-dropdown .iris-option');
+        if (initialAccount) {
+            initialAccount.click();
+        }
+    });
+</script>
