@@ -48,6 +48,8 @@
 
 }
 
+<div class="widget-info">@Html.Raw(Html.SiteText("WidgetInfo"))</div>
+
 <div class="container" style="margin-top:20px;">
     <div class="row">
         <div class="col-sm">
@@ -118,9 +120,20 @@
                 <h2>${charity.Name}</h2>
                 <img src="${charity.LogoUrl}" alt="${charity.Name} Logo">
                 <p>${charity.CharityInfo}</p>
-                <p>Total Donations Given: ${formattedTotalDonationAmount}</p>
-                <p>Goal Amount: ${formattedGoalAmount}</p>
                 <a target='_blank' href="${charity.WebsiteUrl}">Visit Website</a>
+                <div class="iris-progress-bar iris-progress-bar--info">
+                    <h3 class="iris-progress-bar__title font-weight--500">${formattedTotalDonationAmount}</h3>
+                    <progress class="iris-progress-bar__meter"
+                              role="progressbar"
+                              aria-valuemin="0"
+                              aria-valuenow="${formattedTotalDonationAmount}"
+                              aria-valuemax="${formattedGoalAmount}"
+                              aria-valuetext="$350 out of ${formattedTotalDonationAmount} required"
+                              value="${parseFloat(formattedTotalDonationAmount.replace(/[$,]/g, ""))}"
+                              max="${parseFloat(formattedGoalAmount.replace(/[$,]/g, ""))}">
+                    </progress>
+                    <span class="iris-progress-bar__secondary-info font-size--xs">${formattedGoalAmount} required</span>
+                </div>
             `;
             charityInfoDiv.style.display = 'block';
         } else {

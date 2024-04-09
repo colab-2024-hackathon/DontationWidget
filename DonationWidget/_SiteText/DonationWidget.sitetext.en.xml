@@ -3,5 +3,7 @@
   <entries>
     <entry Key="Title">$displayname$</entry>
     <entry Key="MobileTitle">Mobile $displayname$</entry>
+
+    <entry Key="WidgetInfo">&lt;span&gt;Welcome to the Donations Page. Here you can contribute to a cause that positively affects our community. Learn more about donations at &lt;a href=&quot;https://www.monterra.org/community-involvement/community-giving&quot;&gt;our website&lt;/a&gt;.&lt;/span&gt;</entry>
   </entries>
 </SiteText>
