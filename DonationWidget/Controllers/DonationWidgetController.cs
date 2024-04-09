@@ -26,7 +26,9 @@ using Alkami.MicroServices.Transfers.CoreProxy.Service;
 using Alkami.MicroServices.Transfers.CoreProxy.Contracts.Requests;
 using Alkami.MicroServices.Transfers.CoreProxy.Contracts.Models;
 using System.IO;
-using Alkami.MicroServices.Accounts.Service.Client;
+using Newtonsoft.Json;
+using System.Runtime.CompilerServices;
+using System.Linq.Expressions;
 
 //using Alkami.Client.Framework.Utility;//used when widget setting is uncommented below
 
@@ -62,38 +64,7 @@ namespace DonationWidget.Controllers
             
             try
             {
-                List<Charity> charityList = new List<Charity>() {
-                    new Charity()
-                    {
-                        AccountIdentifier=Guid.NewGuid(),
-                        Name="United Way",
-                        CharityInfo="United Way is a non-profit organization that works with almost 1,200 local United Way offices throughout the country in a coalition of charitable organizations to pool efforts in fundraising and support.",
-                        TotalDonationAmount=1000,
-                        GoalAmount=5000,
-                        WebsiteUrl="https://www.unitedway.org/",
-                        LogoUrl="https://www.unitedway.org/assets/img/united-way-lock-up-rgb-cropped.jpg"
-                    },
-                    new Charity()
-                    {
-                        AccountIdentifier = Guid.NewGuid(),
-                        Name = "American Red Cross",
-                        CharityInfo = "The American Red Cross is a humanitarian organization that provides emergency assistance, disaster relief, and education inside the United States.",
-                        TotalDonationAmount = 2000,
-                        GoalAmount = 10000,
-                        WebsiteUrl = "https://www.redcross.org/",
-                        LogoUrl = "https://www.redcross.org/content/dam/redcross/imported-images/redcross-logo.png.img.png"
-                    },
-                    new Charity()
-                    {
-                        AccountIdentifier = Guid.NewGuid(),
-                        Name = "Salvation Army",
-                        CharityInfo = "The Salvation Army is a Protestant Christian church and an international charitable organization. The organization reports a worldwide membership of over 1.7 million, consisting of soldiers, officers and adherents collectively known as Salvationists.",
-                        TotalDonationAmount = 3000,
-                        GoalAmount = 15000,
-                        WebsiteUrl = "https://www.salvationarmyusa.org/",
-                        LogoUrl = "https://static.salvationarmy.org/us-east-1/templates/symphony/static_resources/images/global/shield.svg"
-                    },
-                };
+                List<Charity> charityList = ReadCharitiesFromFile();
                 model.Charities = charityList;
                 var userId = this.CurrentUser.Id;
                 var Accounts = GetAccounts(userId);
@@ -374,6 +345,7 @@ namespace DonationWidget.Controllers
             return result;
         }
 
+        [HttpPost]
         public ActionResult Donate(string SelectedCharity, string SelectedAccount, decimal DonationAmount)
         {
             // For real life 
@@ -387,10 +359,42 @@ namespace DonationWidget.Controllers
 
             TransferFunds(transaction);
             LogTransfer(transaction);
-
+            RewriteCharitiesFile(transaction);
 
             // Redirect to a confirmation page or back to the form with a success message
             return RedirectToAction("DonationSuccess");
+        }
+
+        private void RewriteCharitiesFile(DonationTransactionModel transaction)
+        {
+            List<Charity> charityList = ReadCharitiesFromFile();
+            var charity = charityList.FirstOrDefault(x => x.AccountIdentifier.ToString() == transaction.ToCharity);
+            charity.TotalDonationAmount += transaction.Amount;
+            WriteCharitiesToFile(charityList);
+        }
+
+        public List<Charity> ReadCharitiesFromFile()
+        {
+            string filepath = "C:\\Database\\Charities.json";
+
+            try
+            {
+                var jsonString = System.IO.File.ReadAllText(filepath);
+                var charityList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Charity>>(jsonString);
+                return charityList;
+            }
+            catch (FileNotFoundException e)
+            {
+                Logger.Error("Could not find charities.json. Please copy it from the Tools folder into the c:\\Database folder.", e);
+                throw new FileNotFoundException("Error reading charities from file", e);
+            }
+        }
+
+        public void WriteCharitiesToFile(List<Charity> charityList)
+        {
+            string filepath = "C:\\Database\\Charities.json";
+            var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(charityList);
+            System.IO.File.WriteAllText(filepath, jsonString);
         }
     }
 }

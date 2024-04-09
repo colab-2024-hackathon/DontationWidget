@@ -13,5 +13,5 @@ namespace DonationWidget.Models
 		public Account FromAccount { get; set; }
 		public string ToCharity { get; set; }
 		public decimal Amount { get; set; }
-	}
+    }
 }

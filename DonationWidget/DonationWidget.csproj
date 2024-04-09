@@ -433,6 +433,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Tools\Charities.json" />
     <None Include="Tools\PostBuild.ps1" />
     <None Include="DonationWidget.nuspec" />
     <Compile Include="Models\Charity.cs" />
