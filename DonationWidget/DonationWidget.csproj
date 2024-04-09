@@ -166,6 +166,9 @@
     <Reference Include="Alkami.Client.Services.Nag, Version=2024.2.0.957, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Alkami.Client.2024.2.0.957\lib\net472\Alkami.Client.Services.Nag.dll</HintPath>
     </Reference>
+    <Reference Include="Alkami.Client.Services.Notification, Version=2024.2.0.957, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Alkami.Client.Services.Notification.2024.2.0.957\lib\net472\Alkami.Client.Services.Notification.dll</HintPath>
+    </Reference>
     <Reference Include="Alkami.Client.Services.Security, Version=2024.2.0.957, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Alkami.Client.2024.2.0.957\lib\net472\Alkami.Client.Services.Security.dll</HintPath>
     </Reference>
