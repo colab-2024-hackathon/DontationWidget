@@ -45,12 +45,25 @@ namespace DonationWidget.Controllers
 
         public ActionResult Index()
         {
-
+            var model = new DonationWidgetModel();
+            
             try
             {
+                List<Charity> charityList = new List<Charity>() {
+                    new Charity()
+                    {
+                        AccountIdentifier=Guid.NewGuid(),
+                        Name="United Way",
+                        CharityInfo="United Way is a non-profit organization that works with almost 1,200 local United Way offices throughout the country in a coalition of charitable organizations to pool efforts in fundraising and support.",
+                        TotalDonationAmount=1000,
+                        GoalAmount=5000,
+                        WebsiteUrl="https://www.unitedway.org/",
+                        LogoUrl="https://www.unitedway.org/assets/img/united-way-lock-up-rgb-cropped.jpg"
+                    }
+                };
+                model.Charities = charityList;
                 Logger.DebugFormat($" {logPrefix} [GET] Controller/Index");
-
-                return View("Index");
+                return View(model);
             }
             catch (Exception e)
             {

@@ -1,5 +1,7 @@
 ﻿using Alkami.Client.Framework.Mvc;
+using DonationWidget.Models;
 using System;
+using System.Collections.Generic;
 
 namespace DonationWidget.Models
 {
@@ -9,5 +11,6 @@ namespace DonationWidget.Models
         /// Display method
         /// </summary>
         public string DisplayMethod { get; set; }
+        public List<Charity> Charities { get; set; }
     }
 }
