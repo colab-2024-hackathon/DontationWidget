@@ -352,17 +352,32 @@ namespace DonationWidget.Controllers
             // var charityId = Guid.Parse(SelectedCharity);
             var transaction = new DonationTransactionModel
             {
-                FromAccount = GetAnAccount((long)Convert.ToDouble(SelectedAccount)),
+                //FromAccount = GetAnAccount((long)Convert.ToDouble(SelectedAccount)),
                 ToCharity = SelectedCharity,
                 Amount = DonationAmount
             };
 
-            TransferFunds(transaction);
-            LogTransfer(transaction);
-            RewriteCharitiesFile(transaction);
+            try
+            {
+                //TransferFunds(transaction);
+                //LogTransfer(transaction);
+                RewriteCharitiesFile(transaction);
+                SendEmail();
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Error [POST] Controller/Donate", e);
+                return View("Error");
+            }
 
+            // get charity name using the charity id (ToCharity)
+            List<Charity> charityList = ReadCharitiesFromFile();
+            var charity = charityList.FirstOrDefault(x => x.AccountIdentifier.ToString() == transaction.ToCharity);
+            ViewBag.DonationAmount = DonationAmount.ToString();
+            ViewBag.CharityName = charity.Name;
+            
             // Redirect to a confirmation page or back to the form with a success message
-            return RedirectToAction("DonationSuccess");
+            return RedirectToAction("ConfirmationPage");
         }
 
         private void RewriteCharitiesFile(DonationTransactionModel transaction)

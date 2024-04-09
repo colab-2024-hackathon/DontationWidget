@@ -53,7 +53,7 @@
 }
 
 <div class="widget-info">@Html.Raw(Html.SiteText("WidgetInfo"))</div>
-<img src="@Url.Content("~/Images/DonationBanner.jpg")" alt="Donation Banner" />
+<img src="@Url.Content("~/Areas/DonationWidget/Images/DonationBanner.png")" alt="Donation Banner" />
 
 @using (Html.BeginForm("Donate", "DonationWidget", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
